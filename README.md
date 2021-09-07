@@ -1,0 +1,2 @@
+- Logged in admin user should not be able to delete themselves
+- There should be a minimum number of admin users (should not be less than 2 admins? (or 1?))
