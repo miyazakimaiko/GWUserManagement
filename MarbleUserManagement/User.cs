@@ -45,7 +45,7 @@ namespace GWUserManagement
             }
         }
         public string Group { get => group; set => group = value; }
-        public string Image { get => image; set => group = image; }
+        public string Image { get => image; set => image = value; }
 
         public override string ToString()
         {
