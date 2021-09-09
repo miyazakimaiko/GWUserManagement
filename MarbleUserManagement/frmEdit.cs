@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Drawing;
+using System.IO;
 using System.Linq;
 using System.Net.Mail;
 using System.Text;
@@ -15,17 +16,24 @@ namespace GWUserManagement
 {
     public partial class frmEdit : Form
     {
+        // edit or add
+        string requestType;
+
         private User user;
-        public User editedUser;
+        public User newUser;
         private List<User> users;
+
+        // primary key
         private string currentUserEmail;
+
         private bool editingLoggedInUser = false;
         frmHome home;
 
-        public frmEdit(frmHome home, User user, List<User> users)
+        public frmEdit(frmHome home, User user, List<User> users, string type)
         {
             InitializeComponent();
 
+            this.requestType = type;
             this.user = user;
             this.users = users;
             this.currentUserEmail = user.Email;
@@ -107,32 +115,47 @@ namespace GWUserManagement
             bool newAdmin = checkBoxAdministraion.Checked;
             string newGroup = HttpUtility.HtmlEncode(comboBoxGroup.Text);
 
-            editedUser = new User(
-                newEmail, 
-                newName, 
-                newPhone, 
-                newAdmin, 
-                newPassword, 
-                newGroup, 
-                newImage);
-
             if (nameIsValid & emailIsValid & phoneIsValid & passwordIsValid & passwordRetypeIsValid & groupIsValid)
             {
-                frmEditConfirm confirmationForm = new frmEditConfirm(currentUserEmail, user);
-                confirmationForm.ShowDialog();
+                newUser = new User(
+                    newEmail,
+                    newName,
+                    newPhone,
+                    newAdmin,
+                    newPassword,
+                    newGroup,
+                    newImage);
 
-                this.Close();
 
-                home.users.RemoveAll(user => user.Email == this.currentUserEmail);
-                home.users.Add(editedUser);
-                home.users = home.users.OrderBy(user => user.Email).ToList();
-
-                if (editingLoggedInUser)
+                if (requestType == "edit")
                 {
-                    // this enables to change "logged in as: " label on the home screen as is edited
-                    home.loggedInUser = editedUser;
-                    editingLoggedInUser = false;
+                    frmEditConfirm confirmationForm = new frmEditConfirm(currentUserEmail, newUser);
+                    confirmationForm.ShowDialog();
+
+                    this.Close();
+
+                    home.users.RemoveAll(user => user.Email == this.currentUserEmail);
+                    home.users.Add(newUser);
+                    home.users = home.users.OrderBy(user => user.Email).ToList();
+
+                    if (editingLoggedInUser)
+                    {
+                        // this enables to change "logged in as: " label on the home screen as is edited
+                        home.loggedInUser = newUser;
+                        editingLoggedInUser = false;
+                    }
                 }
+                else if (requestType == "add")
+                {
+                    frmEditConfirm confirmationForm = new frmEditConfirm(currentUserEmail, newUser);
+                    confirmationForm.ShowDialog();
+
+                    this.Close();
+
+                    home.users.Add(newUser);
+                    home.users = home.users.OrderBy(user => user.Email).ToList();
+                }
+
 
                 home.displayUsers();
             }
@@ -147,7 +170,7 @@ namespace GWUserManagement
                 labelErrorName.Text = "This field cannot be empty.";
                 return false;
             }
-            else if (!System.Text.RegularExpressions.Regex.IsMatch(name, @"^[a-zA-Z0-9\x20]+$"))
+            else if (!System.Text.RegularExpressions.Regex.IsMatch(name, @"^[a-zA-Z0-9\x20']+$"))
             {
                 labelErrorName.Text = "Name can only contain alphabet and number.";
                 return false;
@@ -181,7 +204,6 @@ namespace GWUserManagement
                     return false;
                 }
             }
-
 
             try
             {
@@ -284,6 +306,28 @@ namespace GWUserManagement
                 labelErrorGroup.Text = "";
                 return true;
             }
+        }
+
+        private void buttonFind_Click(object sender, EventArgs e)
+        {
+            int size = -1;
+            OpenFileDialog openFileDialog1 = new OpenFileDialog();
+            DialogResult result = openFileDialog1.ShowDialog(); // Show the dialog.
+            if (result == DialogResult.OK) // Test result.
+            {
+                string file = openFileDialog1.FileName;
+                textBoxImage.Text = file;
+                try
+                {
+                    string text = File.ReadAllText(file);
+                    size = text.Length;
+                }
+                catch (IOException)
+                {
+                }
+            }
+            Console.WriteLine(size); // <-- Shows file size in debugging mode.
+            Console.WriteLine(result); // <-- For debugging use.
         }
     }
 }

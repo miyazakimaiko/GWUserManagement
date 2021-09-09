@@ -97,7 +97,7 @@ namespace GWUserManagement
             // label6
             // 
             this.label6.AutoSize = true;
-            this.label6.Location = new System.Drawing.Point(62, 299);
+            this.label6.Location = new System.Drawing.Point(63, 339);
             this.label6.Name = "label6";
             this.label6.Size = new System.Drawing.Size(89, 15);
             this.label6.TabIndex = 6;
@@ -115,7 +115,7 @@ namespace GWUserManagement
             // label8
             // 
             this.label8.AutoSize = true;
-            this.label8.Location = new System.Drawing.Point(62, 346);
+            this.label8.Location = new System.Drawing.Point(63, 386);
             this.label8.Name = "label8";
             this.label8.Size = new System.Drawing.Size(43, 15);
             this.label8.TabIndex = 8;
@@ -123,7 +123,7 @@ namespace GWUserManagement
             // 
             // buttonGoBack
             // 
-            this.buttonGoBack.Location = new System.Drawing.Point(265, 397);
+            this.buttonGoBack.Location = new System.Drawing.Point(266, 437);
             this.buttonGoBack.Name = "buttonGoBack";
             this.buttonGoBack.Size = new System.Drawing.Size(97, 33);
             this.buttonGoBack.TabIndex = 9;
@@ -133,7 +133,7 @@ namespace GWUserManagement
             // 
             // buttonConfirm
             // 
-            this.buttonConfirm.Location = new System.Drawing.Point(378, 397);
+            this.buttonConfirm.Location = new System.Drawing.Point(379, 437);
             this.buttonConfirm.Name = "buttonConfirm";
             this.buttonConfirm.Size = new System.Drawing.Size(97, 33);
             this.buttonConfirm.TabIndex = 10;
@@ -175,16 +175,15 @@ namespace GWUserManagement
             // 
             // labelImage
             // 
-            this.labelImage.AutoSize = true;
             this.labelImage.Location = new System.Drawing.Point(222, 259);
             this.labelImage.Name = "labelImage";
-            this.labelImage.Size = new System.Drawing.Size(0, 15);
+            this.labelImage.Size = new System.Drawing.Size(253, 62);
             this.labelImage.TabIndex = 15;
             // 
             // labelAdministration
             // 
             this.labelAdministration.AutoSize = true;
-            this.labelAdministration.Location = new System.Drawing.Point(222, 299);
+            this.labelAdministration.Location = new System.Drawing.Point(223, 339);
             this.labelAdministration.Name = "labelAdministration";
             this.labelAdministration.Size = new System.Drawing.Size(0, 15);
             this.labelAdministration.TabIndex = 16;
@@ -192,7 +191,7 @@ namespace GWUserManagement
             // labelGroup
             // 
             this.labelGroup.AutoSize = true;
-            this.labelGroup.Location = new System.Drawing.Point(222, 346);
+            this.labelGroup.Location = new System.Drawing.Point(223, 386);
             this.labelGroup.Name = "labelGroup";
             this.labelGroup.Size = new System.Drawing.Size(0, 15);
             this.labelGroup.TabIndex = 17;
@@ -201,7 +200,7 @@ namespace GWUserManagement
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(520, 466);
+            this.ClientSize = new System.Drawing.Size(520, 504);
             this.Controls.Add(this.labelGroup);
             this.Controls.Add(this.labelAdministration);
             this.Controls.Add(this.labelImage);

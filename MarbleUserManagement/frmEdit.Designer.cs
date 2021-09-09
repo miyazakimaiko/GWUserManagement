@@ -196,6 +196,7 @@ namespace GWUserManagement
             // 
             this.textBoxImage.Location = new System.Drawing.Point(174, 317);
             this.textBoxImage.Name = "textBoxImage";
+            this.textBoxImage.ReadOnly = true;
             this.textBoxImage.Size = new System.Drawing.Size(278, 23);
             this.textBoxImage.TabIndex = 25;
             // 
@@ -216,6 +217,7 @@ namespace GWUserManagement
             this.buttonFind.TabIndex = 26;
             this.buttonFind.Text = "Find..";
             this.buttonFind.UseVisualStyleBackColor = true;
+            this.buttonFind.Click += new System.EventHandler(this.buttonFind_Click);
             // 
             // checkBoxAdministraion
             // 
