@@ -76,6 +76,7 @@ namespace GWUserManagement
                 textBoxPhoneNumber.Text = selectedUser.Phone;
                 checkBoxAdministration.Checked = selectedUser.IsAdmin;
                 textBoxGroup.Text = selectedUser.Group;
+                pictureBoxImage.ImageLocation = selectedUser.Image;
 
                 if (loggedInUser.IsAdmin)
                 {
@@ -97,10 +98,17 @@ namespace GWUserManagement
 
         private void buttonEdit_Click(object sender, EventArgs e)
         {
-            frmEdit editForm = new frmEdit(this, selectedUser, users);
+            string type = "edit";
+
+            frmEdit editForm = new frmEdit(this, selectedUser, users, type);
             editForm.ShowDialog();
 
-            listBoxUsers.SelectedItem = editForm.editedUser;
+            listBoxUsers.SelectedItem = editForm.newUser;
+        }
+
+        private void buttonAdd_Click(object sender, EventArgs e)
+        {
+
         }
     }
 }

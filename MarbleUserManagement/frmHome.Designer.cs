@@ -58,6 +58,7 @@ namespace GWUserManagement
             this.listBoxUsers.TabIndex = 0;
             this.listBoxUsers.TextChanged += new System.EventHandler(this.listBoxUsers_Select);
             this.listBoxUsers.SelectedValueChanged += new System.EventHandler(this.listBoxUsers_Select);
+            this.listBoxUsers.DoubleClick += new System.EventHandler(this.buttonEdit_Click);
             // 
             // labelEmailAddress
             // 
@@ -106,9 +107,10 @@ namespace GWUserManagement
             // 
             // pictureBoxImage
             // 
-            this.pictureBoxImage.Location = new System.Drawing.Point(383, 92);
+            this.pictureBoxImage.Location = new System.Drawing.Point(389, 92);
             this.pictureBoxImage.Name = "pictureBoxImage";
-            this.pictureBoxImage.Size = new System.Drawing.Size(149, 134);
+            this.pictureBoxImage.Size = new System.Drawing.Size(143, 143);
+            this.pictureBoxImage.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
             this.pictureBoxImage.TabIndex = 6;
             this.pictureBoxImage.TabStop = false;
             // 
@@ -140,6 +142,7 @@ namespace GWUserManagement
             this.buttonAdd.TabIndex = 9;
             this.buttonAdd.Text = "Add New User";
             this.buttonAdd.UseVisualStyleBackColor = true;
+            this.buttonAdd.Click += new System.EventHandler(this.buttonAdd_Click);
             // 
             // textBoxName
             // 
@@ -197,7 +200,7 @@ namespace GWUserManagement
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(695, 585);
+            this.ClientSize = new System.Drawing.Size(695, 584);
             this.Controls.Add(this.labelLoggedInName);
             this.Controls.Add(this.checkBoxAdministration);
             this.Controls.Add(this.textBoxGroup);
