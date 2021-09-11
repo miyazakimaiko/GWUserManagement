@@ -22,10 +22,6 @@ namespace GWUserManagement
         public frmHome()
         {
             InitializeComponent();
-
-            buttonAdd.Enabled = false;
-            buttonDelete.Enabled = false;
-            buttonEdit.Enabled = false;
         }
 
         private void Home_Load(object sender, EventArgs e)
@@ -37,6 +33,8 @@ namespace GWUserManagement
 
             this.users = dbUsers.GetUsers(this.connection);
 
+            connection.CloseConnection();
+
             Form loginForm = new frmLogin(this, this.users);
             loginForm.ShowDialog();
 
@@ -45,8 +43,7 @@ namespace GWUserManagement
                 displayUsers();
                 listBoxUsers.SelectedItem = loggedInUser;
             }
-            else
-                this.Close();
+            this.Close();
         }
 
         public void displayUsers()
@@ -59,10 +56,10 @@ namespace GWUserManagement
             }
             listBoxUsers.DisplayMember = "Name";
 
-            if (loggedInUser.IsAdmin)
-                buttonAdd.Enabled = true;
+            if (!loggedInUser.IsAdmin)
+                buttonAdd.Enabled = false;
 
-            labelLoggedInName.Text = $"Hello, {loggedInUser.Name}({loggedInUser.Email})";
+            labelLoggedInName.Text = $"Hello, {loggedInUser.Name} ({loggedInUser.Email})";
         }
 
         private void listBoxUsers_Select(object sender, EventArgs e)
@@ -77,38 +74,83 @@ namespace GWUserManagement
                 checkBoxAdministration.Checked = selectedUser.IsAdmin;
                 textBoxGroup.Text = selectedUser.Group;
                 pictureBoxImage.ImageLocation = selectedUser.Image;
-
+                
                 if (loggedInUser.IsAdmin)
                 {
                     buttonDelete.Enabled = true;
                     buttonEdit.Enabled = true;
                 }
-                else if (selectedUser == loggedInUser)
-                    buttonEdit.Enabled = true;
-
                 else if (selectedUser != loggedInUser)
                     buttonEdit.Enabled = false;
+
+                if (selectedUser == loggedInUser)
+                {
+                    buttonEdit.Enabled = true;
+                    buttonDelete.Enabled = false;
+                }
             }
         }
 
         private void buttonDelete_Click(object sender, EventArgs e)
         {
+            if (selectedUser == loggedInUser)
+            {
+                MessageBox.Show("You cannot delete logged in user.");
+                return;
+            }
 
+            frmConfirm confirmForm = new frmConfirm("delete", selectedUser);
+            confirmForm.ShowDialog();
+
+            if (confirmForm.completed == true)
+            {
+                users.RemoveAll(user => user.Email == selectedUser.Email);
+                users = users.OrderBy(user => user.Email).ToList();
+
+                displayUsers();
+                listBoxUsers.SelectedItem = loggedInUser;
+            }
         }
 
         private void buttonEdit_Click(object sender, EventArgs e)
         {
-            string type = "edit";
+            bool editingLoggedInUser = loggedInUser == selectedUser ? true : false;
+            string currentUserEmail = selectedUser.Email;
 
-            frmEdit editForm = new frmEdit(this, selectedUser, users, type);
+            frmEdit editForm = new frmEdit(selectedUser, users, loggedInUser.IsAdmin);
+
             editForm.ShowDialog();
 
-            listBoxUsers.SelectedItem = editForm.newUser;
+            if (editForm.confirmationForm != null && editForm.confirmationForm.completed == true)
+            {
+                users.RemoveAll(user => user.Email == currentUserEmail);
+                users.Add(editForm.newUser);
+                users = users.OrderBy(user => user.Email).ToList();
+
+                if (editingLoggedInUser)
+                {
+                    // this enables to change "logged in as: " label on the home screen as is edited
+                    loggedInUser = editForm.newUser;
+                }
+
+                displayUsers();
+                listBoxUsers.SelectedItem = editForm.newUser;
+            }
         }
 
         private void buttonAdd_Click(object sender, EventArgs e)
         {
+            frmAdd addForm = new frmAdd(this, users);
+            addForm.ShowDialog();
 
+            if (addForm.confirmationForm != null && addForm.confirmationForm.completed == true)
+            {
+                users.Add(addForm.newUser);
+                users = users.OrderBy(user => user.Email).ToList();
+
+                displayUsers();
+                listBoxUsers.SelectedItem = addForm.newUser;
+            }
         }
     }
 }
