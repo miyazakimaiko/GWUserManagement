@@ -51,7 +51,7 @@ namespace GWUserManagement
 
         private void buttonConfirm_Click(object sender, EventArgs e)
         {
-            DBConnection connection = new DBConnection("localhost", "usermanagement", "root", "Maiko119922");
+            DBConnection connection = new DBConnection("localhost", "usermanagement", "root", "password");
             DBUsers dbUsers = new DBUsers();
 
             connection.OpenConnection();
