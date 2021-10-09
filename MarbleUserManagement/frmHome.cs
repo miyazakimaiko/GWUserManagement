@@ -26,7 +26,7 @@ namespace GWUserManagement
 
         private void Home_Load(object sender, EventArgs e)
         {
-            this.connection = new DBConnection("localhost", "usermanagement", "root", "Maiko119922");
+            this.connection = new DBConnection("localhost", "usermanagement", "root", "password");
             DBUsers dbUsers = new DBUsers();
 
             this.connection.OpenConnection();
@@ -43,7 +43,6 @@ namespace GWUserManagement
                 displayUsers();
                 listBoxUsers.SelectedItem = loggedInUser;
             }
-            this.Close();
         }
 
         public void displayUsers()
@@ -121,7 +120,7 @@ namespace GWUserManagement
 
             editForm.ShowDialog();
 
-            if (editForm.confirmationForm != null && editForm.confirmationForm.completed == true)
+            if (editForm.editCompleted == true)
             {
                 users.RemoveAll(user => user.Email == currentUserEmail);
                 users.Add(editForm.newUser);
@@ -143,7 +142,7 @@ namespace GWUserManagement
             frmAdd addForm = new frmAdd(this, users);
             addForm.ShowDialog();
 
-            if (addForm.confirmationForm != null && addForm.confirmationForm.completed == true)
+            if (addForm.addCompleted == true)
             {
                 users.Add(addForm.newUser);
                 users = users.OrderBy(user => user.Email).ToList();
