@@ -17,7 +17,14 @@ namespace GWUserManagement
         private List<User> users;
         public frmConfirm confirmationForm;
 
-        public bool dbSuccessful;
+        public bool addCompleted = false;
+
+        bool nameIsValid;
+        bool emailIsValid;
+        bool phoneIsValid;
+        bool passwordIsValid;
+        bool passwordRetypeIsValid;
+        bool groupIsValid;
 
         public frmAdd(frmHome home, List<User> users)
         {
@@ -33,31 +40,21 @@ namespace GWUserManagement
 
         private void buttonSubmit_Click(object sender, EventArgs e)
         {
-            string newName = HttpUtility.HtmlEncode(textBoxName.Text);
-            string newEmail = HttpUtility.HtmlEncode(textBoxEmailAddress.Text);
-            string newPhone = HttpUtility.HtmlEncode(textBoxPhoneNumber.Text);
-            string newPassword = HttpUtility.HtmlEncode(textBoxPassword.Text);
-            string newImage = HttpUtility.HtmlEncode(textBoxImage.Text);
-            bool newAdmin = checkBoxAdministraion.Checked;
-            string newGroup = HttpUtility.HtmlEncode(comboBoxGroup.Text);
-
-            bool nameIsValid = FieldValidationUtility.validateName(newName, labelErrorName);
-            bool emailIsValid = FieldValidationUtility.validateEmail(newEmail, labelErrorEmail, users);
-            bool phoneIsValid = FieldValidationUtility.validatePhone(newPhone, labelErrorPhone);
-            bool passwordIsValid = FieldValidationUtility.validatePassword(newPassword, labelErrorPassword);
-            bool passwordRetypeIsValid = FieldValidationUtility.validatePasswordRetype(newPassword, textBoxPasswordRetype.Text, labelErrorPasswordRetype);
-            bool groupIsValid = FieldValidationUtility.validateGroup(newGroup, comboBoxGroup, labelErrorGroup);
-
             if (nameIsValid & emailIsValid & phoneIsValid & passwordIsValid & passwordRetypeIsValid & groupIsValid)
             {
+                bool emailIsAvailable = UtilityFieldValidation.isEmailAvailable(textBoxEmailAddress.Text, labelErrorEmail, users);
+
+                if (!emailIsAvailable)
+                    return;
+
                 newUser = new User(
-                    newEmail,
-                    newName,
-                    newPhone,
-                    newAdmin,
-                    newPassword,
-                    newGroup,
-                    newImage);
+                    textBoxEmailAddress.Text,
+                    textBoxName.Text,
+                    textBoxPhoneNumber.Text,
+                    checkBoxAdministraion.Checked,
+                    textBoxPassword.Text,
+                    comboBoxGroup.Text,
+                    textBoxImage.Text);
 
                 try
                 {
@@ -66,6 +63,7 @@ namespace GWUserManagement
 
                     if (confirmationForm.completed)
                     {
+                        this.addCompleted = true;
                         this.Close();
                     }
                 }
@@ -78,7 +76,44 @@ namespace GWUserManagement
 
         private void buttonFind_Click(object sender, EventArgs e)
         {
-            FormUtility.findFilepath(textBoxImage);
+            UtilityFilePath.findFilepath(textBoxImage);
+        }
+
+        private void textBoxName_TextChanged(object sender, EventArgs e)
+        {
+            this.nameIsValid = UtilityFieldValidation.validateName(textBoxName.Text, labelErrorName);
+        }
+
+        private void textBoxEmailAddress_TextChanged(object sender, EventArgs e)
+        {
+            this.emailIsValid = UtilityFieldValidation.validateEmail(textBoxEmailAddress.Text, labelErrorEmail);
+        }
+
+        private void textBoxPhoneNumber_TextChanged(object sender, EventArgs e)
+        {
+            this.phoneIsValid = UtilityFieldValidation.validatePhone(textBoxPhoneNumber.Text, labelErrorPhone);
+        }
+
+        private void textBoxPassword_TextChanged(object sender, EventArgs e)
+        {
+            this.passwordIsValid = UtilityFieldValidation.validatePassword(textBoxPassword.Text, labelErrorPassword);
+        }
+
+        private void textBoxPasswordRetype_TextChanged(object sender, EventArgs e)
+        {
+            this.passwordRetypeIsValid = UtilityFieldValidation.validatePasswordRetype(
+                textBoxPassword.Text, textBoxPasswordRetype.Text, labelErrorPasswordRetype);
+        }
+
+        private void textBoxImage_TextChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void comboBoxGroup_TextChanged(object sender, EventArgs e)
+        {
+            this.groupIsValid = UtilityFieldValidation.validateGroup(
+                comboBoxGroup.Text, comboBoxGroup, labelErrorGroup);
         }
     }
 }
