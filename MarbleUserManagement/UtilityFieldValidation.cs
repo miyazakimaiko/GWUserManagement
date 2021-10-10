@@ -54,7 +54,7 @@ namespace GWUserManagement
             }
         }
 
-        public static bool isEmailAvailable(string newEmail, Label errorLabel, List<User> users, string currentEmail = null)
+        public static bool isEmailUnique(string newEmail, Label errorLabel, List<User> users, string currentEmail = null)
         {
             foreach (User user in users)
             {
