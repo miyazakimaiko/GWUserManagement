@@ -1,11 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Web;
 
@@ -25,7 +19,7 @@ namespace GWUserManagement
             textBoxPassword.PasswordChar = '*';
         }
 
-        private void Login_Load(object sender, EventArgs e) {}
+        private void Login_Load(object sender, EventArgs e) { }
 
         private void buttonLogin_Click(object sender, EventArgs e)
         {
@@ -48,7 +42,7 @@ namespace GWUserManagement
                 return;
             }
 
-            string pwd = HttpUtility.HtmlEncode(this.textBoxPassword.Text);
+            string pwd = this.textBoxPassword.Text;
             bool pwdIsValid = targetUser.Password == pwd ? true : false;
 
             if (!pwdIsValid)
