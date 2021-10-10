@@ -72,10 +72,5 @@ namespace GWUserManagement
             completed = true;
             this.Close();
         }
-
-        public bool isCompleted()
-        {
-            return completed;
-        }
     }
 }
