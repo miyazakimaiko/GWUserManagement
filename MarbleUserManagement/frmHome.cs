@@ -1,11 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel;
 using System.Data;
-using System.Drawing;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace GWUserManagement
@@ -42,6 +38,11 @@ namespace GWUserManagement
             {
                 displayUsers();
                 listBoxUsers.SelectedItem = loggedInUser;
+            }
+            else
+            {
+                // Without this, the user would be able to see the blank home dialog without login. 
+                this.Close();
             }
         }
 
