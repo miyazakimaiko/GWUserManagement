@@ -29,6 +29,7 @@ namespace GWUserManagement
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             this.labelGroup = new System.Windows.Forms.Label();
             this.labelPhoneNumber = new System.Windows.Forms.Label();
             this.labelName = new System.Windows.Forms.Label();
@@ -55,6 +56,11 @@ namespace GWUserManagement
             this.labelErrorPasswordRetype = new System.Windows.Forms.Label();
             this.labelErrorImage = new System.Windows.Forms.Label();
             this.labelErrorGroup = new System.Windows.Forms.Label();
+            this.toolTipResetButton = new System.Windows.Forms.ToolTip(this.components);
+            this.toolTipName = new System.Windows.Forms.ToolTip(this.components);
+            this.toolTipEmail = new System.Windows.Forms.ToolTip(this.components);
+            this.toolTipPhone = new System.Windows.Forms.ToolTip(this.components);
+            this.toolTipPassword = new System.Windows.Forms.ToolTip(this.components);
             this.SuspendLayout();
             // 
             // labelGroup
@@ -323,6 +329,26 @@ namespace GWUserManagement
             this.labelErrorGroup.Size = new System.Drawing.Size(0, 32);
             this.labelErrorGroup.TabIndex = 56;
             // 
+            // toolTipResetButton
+            // 
+            this.toolTipResetButton.ToolTipIcon = System.Windows.Forms.ToolTipIcon.Info;
+            // 
+            // toolTipName
+            // 
+            this.toolTipName.ToolTipIcon = System.Windows.Forms.ToolTipIcon.Info;
+            // 
+            // toolTipEmail
+            // 
+            this.toolTipEmail.ToolTipIcon = System.Windows.Forms.ToolTipIcon.Info;
+            // 
+            // toolTipPhone
+            // 
+            this.toolTipPhone.ToolTipIcon = System.Windows.Forms.ToolTipIcon.Info;
+            // 
+            // toolTipPassword
+            // 
+            this.toolTipPassword.ToolTipIcon = System.Windows.Forms.ToolTipIcon.Info;
+            // 
             // frmEdit
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(13F, 32F);
@@ -391,5 +417,10 @@ namespace GWUserManagement
         private System.Windows.Forms.Label labelErrorPasswordRetype;
         private System.Windows.Forms.Label labelErrorImage;
         private System.Windows.Forms.Label labelErrorGroup;
+        private System.Windows.Forms.ToolTip toolTipResetButton;
+        private System.Windows.Forms.ToolTip toolTipName;
+        private System.Windows.Forms.ToolTip toolTipEmail;
+        private System.Windows.Forms.ToolTip toolTipPhone;
+        private System.Windows.Forms.ToolTip toolTipPassword;
     }
 }

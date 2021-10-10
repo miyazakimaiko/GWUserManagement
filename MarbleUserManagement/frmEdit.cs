@@ -35,6 +35,17 @@ namespace GWUserManagement
         private void frmEdit_Load(object sender, EventArgs e)
         {
             fillTextBoxes();
+            toolTipResetButton.SetToolTip(buttonReset, "You'll reset the changes you've made so far.");
+
+            toolTipName.SetToolTip(labelName, "Name can only contain alphabet and number.");
+            toolTipEmail.SetToolTip(labelEmailAddress,
+                "Must be email format. (e.g. sample@test.com).\r\n" +
+                "Email address that is already used by other user cannot be used.");
+            toolTipPhone.SetToolTip(labelPhoneNumber, "Only + symbol, number and space are accepted.");
+            toolTipPassword.SetToolTip(labelPassword,
+                "Password should contain at least one lower case letter, one upper case letter,\r\n" +
+                "one numeric value, and one special case character.\r\n" +
+                "Password should not be lesser than 8 or greater than 15 characters.");
         }
 
         private void fillTextBoxes()

@@ -29,6 +29,7 @@ namespace GWUserManagement
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             this.labelErrorGroup = new System.Windows.Forms.Label();
             this.labelErrorImage = new System.Windows.Forms.Label();
             this.labelErrorPasswordRetype = new System.Windows.Forms.Label();
@@ -54,6 +55,11 @@ namespace GWUserManagement
             this.labelPhoneNumber = new System.Windows.Forms.Label();
             this.labelName = new System.Windows.Forms.Label();
             this.labelEmailAddress = new System.Windows.Forms.Label();
+            this.toolTipName = new System.Windows.Forms.ToolTip(this.components);
+            this.toolTip2 = new System.Windows.Forms.ToolTip(this.components);
+            this.toolTipEmail = new System.Windows.Forms.ToolTip(this.components);
+            this.toolTipPhone = new System.Windows.Forms.ToolTip(this.components);
+            this.toolTipPassword = new System.Windows.Forms.ToolTip(this.components);
             this.SuspendLayout();
             // 
             // labelErrorGroup
@@ -312,6 +318,22 @@ namespace GWUserManagement
             this.labelEmailAddress.TabIndex = 57;
             this.labelEmailAddress.Text = "Email Address: ";
             // 
+            // toolTipName
+            // 
+            this.toolTipName.ToolTipIcon = System.Windows.Forms.ToolTipIcon.Info;
+            // 
+            // toolTipEmail
+            // 
+            this.toolTipEmail.ToolTipIcon = System.Windows.Forms.ToolTipIcon.Info;
+            // 
+            // toolTipPhone
+            // 
+            this.toolTipPhone.ToolTipIcon = System.Windows.Forms.ToolTipIcon.Info;
+            // 
+            // toolTipPassword
+            // 
+            this.toolTipPassword.ToolTipIcon = System.Windows.Forms.ToolTipIcon.Info;
+            // 
             // frmAdd
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(13F, 32F);
@@ -378,5 +400,10 @@ namespace GWUserManagement
         private System.Windows.Forms.Label labelPhoneNumber;
         private System.Windows.Forms.Label labelName;
         private System.Windows.Forms.Label labelEmailAddress;
+        private System.Windows.Forms.ToolTip toolTipName;
+        private System.Windows.Forms.ToolTip toolTip2;
+        private System.Windows.Forms.ToolTip toolTipEmail;
+        private System.Windows.Forms.ToolTip toolTipPhone;
+        private System.Windows.Forms.ToolTip toolTipPassword;
     }
 }
