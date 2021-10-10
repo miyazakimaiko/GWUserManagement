@@ -80,7 +80,7 @@ namespace GWUserManagement
             }
             else if (!System.Text.RegularExpressions.Regex.IsMatch(phone, @"^[0-9\x20\+]+$"))
             {
-                errorLabel.Text = "Only + symbol and number is accepted.";
+                errorLabel.Text = "Only + symbol, number and space are accepted.";
                 return false;
             }
             else
