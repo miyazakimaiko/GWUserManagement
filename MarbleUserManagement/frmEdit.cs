@@ -6,14 +6,13 @@ namespace GWUserManagement
 {
     public partial class frmEdit : Form
     {
+        // primary key
+        private string currentUserEmail;
         private User user;
         public User newUser;
         private List<User> users;
 
         public bool editCompleted = false;
-
-        // primary key
-        private string currentUserEmail;
 
         public frmEdit(User user, List<User> users, bool userIsAdmin = false)
         {
