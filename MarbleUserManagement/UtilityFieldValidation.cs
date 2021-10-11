@@ -1,10 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Net.Mail;
-using System.Text;
 using System.Text.RegularExpressions;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace GWUserManagement
@@ -20,7 +17,7 @@ namespace GWUserManagement
             }
             else if (!System.Text.RegularExpressions.Regex.IsMatch(name, @"^[a-zA-Z0-9\x20']+$"))
             {
-                errorLabel.Text = "Name can only contain alphabet and number.";
+                errorLabel.Text = "Name can only contain alphabet, number, quotation mark and spaces.";
                 return false;
             }
             else
@@ -100,7 +97,7 @@ namespace GWUserManagement
 
             var hasNumber = new Regex(@"[0-9]+");
             var hasUpperChar = new Regex(@"[A-Z]+");
-            var hasMiniMaxChars = new Regex(@".{8,15}");
+            var hasMiniMaxChars = new Regex(@"^.{8,15}$");
             var hasLowerChar = new Regex(@"[a-z]+");
             var hasSymbols = new Regex(@"[!@#$%^&*()_+=\[{\]};:<>|./?,-]");
 
