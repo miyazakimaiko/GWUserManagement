@@ -8,8 +8,6 @@ namespace GWUserManagement
 {
     public partial class frmHome : Form
     {
-        DBConnection connection = null;
-
         public List<User> users = null;
 
         public User loggedInUser = null;
@@ -22,13 +20,11 @@ namespace GWUserManagement
 
         private void Home_Load(object sender, EventArgs e)
         {
-            this.connection = new DBConnection("localhost", "usermanagement", "root", "password");
+            DBConnection connection = new DBConnection("localhost", "usermanagement", "root", "password");
             DBUsers dbUsers = new DBUsers();
 
-            this.connection.OpenConnection();
-
-            this.users = dbUsers.GetUsers(this.connection);
-
+            connection.OpenConnection();
+            this.users = dbUsers.GetUsers(connection);
             connection.CloseConnection();
 
             Form loginForm = new frmLogin(this, this.users);
