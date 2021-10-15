@@ -29,9 +29,6 @@ namespace GWUserManagement
 
         public static bool validateEmail(string newEmail, Label errorLabel)
         {
-            // If currentEmail is not null, that means the form is editing existing user
-            // otherwise creating new user.
-
             if (string.IsNullOrWhiteSpace(newEmail))
             {
                 errorLabel.Text = "This field cannot be empty.";
@@ -52,7 +49,9 @@ namespace GWUserManagement
         }
 
         public static bool isEmailUnique(string newEmail, Label errorLabel, List<User> users, string currentEmail = null)
-        {
+        {            
+            // If currentEmail is null, that means form is creating a new user.
+            // If null, it's editing an existing user.
             foreach (User user in users)
             {
                 if (user.Email == currentEmail)
